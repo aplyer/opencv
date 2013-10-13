@@ -49,6 +49,7 @@
 #include "opencv2/calib3d.hpp"
 #include "opencv2/objdetect.hpp"
 
+#include "opencv2/core/utility.hpp"
 #include "opencv2/core/private.cuda.hpp"
 
 #include "opencv2/opencv_modules.hpp"
