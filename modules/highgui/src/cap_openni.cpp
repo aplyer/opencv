@@ -105,7 +105,7 @@ public:
         context(_context), depthGenerator(_depthGenerator), imageGenerator(_imageGenerator),
         maxBufferSize(_maxBufferSize), isCircleBuffer(_isCircleBuffer), maxTimeDuration(_maxTimeDuration)
     {
-        task = 0;
+        task = NULL;
 
         CV_Assert( depthGenerator.IsValid() );
         CV_Assert( imageGenerator.IsValid() );
@@ -160,7 +160,8 @@ public:
         if( task )
             tbb::task::destroy( *task );
 #else
-        task.release();
+        //task.release();
+        delete task;
 #endif
     }
 
@@ -246,7 +247,7 @@ private:
         }
 
     protected:
-        ApproximateSyncGrabber& approxSyncGrabber;
+        ApproximateSyncGrabber&  approxSyncGrabber;
         xn::DepthMetaData depth;
         xn::ImageMetaData image;
         bool isDepthFilled;
@@ -416,7 +417,8 @@ private:
 #ifdef HAVE_TBB
     TBBApproximateSynchronizerTask* task;
 #else
-    cv::Ptr<ApproximateSynchronizer> task;
+    //cv::Ptr<ApproximateSynchronizer> task;
+    ApproximateSynchronizer * task;
 #endif
 };
 
